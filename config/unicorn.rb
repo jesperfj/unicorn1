@@ -1,5 +1,5 @@
 # config/unicorn.rb
-worker_processes 3
+worker_processes ENV['WORKER_PROCESSES'].to_i
 timeout 30
 preload_app true
 listen ENV['PORT']
