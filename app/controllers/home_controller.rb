@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 	puts ip.to_s + ':' + ENV['PORT']
   	stats = Raindrops::Linux.tcp_listener_stats([ ip.to_s + ':' + ENV['PORT'] ])
   	stats.each { |addr, stats|
-  		printf fmt, addr, stats.active, stats.queued
+  		puts "#{addr}, #{stats.active}, #{stats.queued}"
   	}
   end
 end
