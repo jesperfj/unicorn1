@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   after_filter :after
 
   def index
+    sleep WAIT.rand
     render :nothing => true, :status => :ok
   end
 
@@ -14,7 +15,7 @@ class HomeController < ApplicationController
 
     ADDR = IPSocket.getaddress(Socket.gethostname).to_s+':'+ENV['PORT']
 
-    WAIT = RandomGaussian.new(50,20)
+    WAIT = RandomGaussian.new(0.050,0.020)
 
 	  def tcp_stats
       if defined? Raindrops::Linux.tcp_listener_stats
