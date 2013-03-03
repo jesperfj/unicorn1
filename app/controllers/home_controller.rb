@@ -19,7 +19,7 @@ class HomeController < ApplicationController
 
 	  def tcp_stats
       if defined? Raindrops::Linux.tcp_listener_stats
-        stats = Raindrops::Linux.tcp_listener_stats([ ADDR ])[ADDR]
+        stats = Raindrops::Linux.tcp_listener_stats([ '0.0.0.0:'+ENV['PORT'] ])[ADDR]
         return { :active => stats.active, :queued => stats.queued }	  	
       else
         return { :active => 0, :queued => 0 }     
