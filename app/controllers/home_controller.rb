@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   after_filter :after
 
   def index
+    render :nothing => true, :status => :ok
   end
 
   protected
@@ -28,7 +29,6 @@ class HomeController < ApplicationController
 	  	@stats = tcp_stats
 	  	@request_start = Time.now.to_f*1000.0
       if request.headers['X-Request-Start']
-        puts request.headers['X-Request-Start']
         @queue_time = @request_start-request.headers['X-Request-Start'].to_f
       else
         @queue_time = 0
@@ -37,7 +37,7 @@ class HomeController < ApplicationController
 
 	  def after
       request_time = Time.now.to_f*1000.0 - @request_start
-      puts "tcp_addr=\"#{ADDR}\" tcp_active=#{@stats[:active]} tcp_queued=#{@stats[:queued]} queue_time=#{@queue_time} request_time=#{request_time}"
+      puts "STATS dyno_addr=#{ADDR} conns_active=#{@stats[:active]} conns_queued=#{@stats[:queued]} queue_time=#{@queue_time} request_time=#{request_time}"
 	  end
 
 end
