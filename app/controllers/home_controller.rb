@@ -26,17 +26,17 @@ class HomeController < ApplicationController
 
 	  def before
 	  	@stats = tcp_stats
-	  	@request_start = Time.now.to_i
+	  	@request_start = Time.now.to_f*1000.0
       if request.headers['X-Request-Start']
         puts request.headers['X-Request-Start']
-        @queue_time = request.headers['X-Request-Start'].to_i-@request_start
+        @queue_time = @request_start-request.headers['X-Request-Start'].to_f
       else
         @queue_time = 0
       end
 	  end
 
 	  def after
-      request_time = Time.now.to_i - @request_start
+      request_time = Time.now.to_f*1000.0 - @request_start
       puts "tcp_addr=\"#{ADDR}\" tcp_active=#{@stats[:active]} tcp_queued=#{@stats[:queued]} queue_time=#{@queue_time} request_time=#{request_time}"
 	  end
 
