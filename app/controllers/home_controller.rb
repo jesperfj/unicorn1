@@ -39,7 +39,7 @@ class HomeController < ApplicationController
 	  def after
       request_time = (Time.now.to_f*1000.0 - @request_start).round
       puts "STATS addr=#{ADDR} conns_active=#{@stats[:active]} conns_queued=#{@stats[:queued]} queue_time=#{@queue_time} request_time=#{request_time}"
-      Librato.group 'routing.'+ADDR { |g|
+      Librato.group('routing.'+ADDR.to_s) { |g|
         g.measure 'conns_active', @stats[:active]
         g.measure 'conns_queued', @stats[:queued]
         g.measure 'queue_time', @queue_time
