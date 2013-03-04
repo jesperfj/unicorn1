@@ -1,8 +1,8 @@
 # config/unicorn.rb
-worker_processes ENV['WORKER_PROCESSES'].to_i
+worker_processes ENV['WORKER_PROCESSES'] ? ENV['WORKER_PROCESSES'].to_i : 1
 timeout 30
 preload_app true
-listen ENV['PORT']
+listen ENV['PORT'], :backlog => (ENV['TCP_BACKLOG'] ? ENV['TCP_BACKLOG'].to_i : 1024)
 
 before_fork do |server, worker|
 
