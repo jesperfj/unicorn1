@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   after_filter :after
 
   def index
-    sleep WAIT.rand
+    sleep [WAIT.rand,0].max
     render :nothing => true, :status => :ok
   end
 
