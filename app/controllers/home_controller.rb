@@ -6,6 +6,14 @@ class HomeController < ApplicationController
   before_filter :before
   after_filter :after
 
+  WAIT_MEAN = ENV['WAIT_MEAN'].to_f || 0.1
+
+  # 1sigma = p841
+  # 2sigma = p977
+  # 3sigma = p998
+
+  WAIT_SDEV = ENV['WAIT_SDEV'].to_f || 0.02
+
   def index
     sleep [WAIT.rand,0].max
     render :nothing => true, :status => :ok
@@ -15,7 +23,7 @@ class HomeController < ApplicationController
 
     ADDR = IPSocket.getaddress(Socket.gethostname).to_s+':'+ENV['PORT']
 
-    WAIT = RandomGaussian.new(0.050,0.020)
+    WAIT = RandomGaussian.new(WAIT_MEAN,WAIT_SDEV)
 
 	  def tcp_stats
       if defined? Raindrops::Linux.tcp_listener_stats
