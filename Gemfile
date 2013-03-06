@@ -37,6 +37,7 @@ gem 'jquery-rails'
 
 # Use unicorn as the app server
 gem 'unicorn'
+gem 'heroku-unicorn-metrics'
 
 # Deploy with Capistrano
 # gem 'capistrano'
