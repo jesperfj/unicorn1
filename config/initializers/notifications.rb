@@ -1,5 +1,5 @@
 # config/initializers
-ActiveSupport::Notifications.subscribe(/unicorn.metrics.queue/) do |*args|
+ActiveSupport::Notifications.subscribe(/rack.queue-metrics/) do |*args|
   event = ActiveSupport::Notifications::Event.new(*args)
   payload = event.payload
 
