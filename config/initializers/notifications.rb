@@ -10,9 +10,9 @@ ActiveSupport::Notifications.subscribe(/rack.queue-metrics/) do |*args|
 
   puts "STATS addr=#{addr} conns_active=#{active} conns_queued=#{queued} queue_time=#{queue_time}"
 
-  Librato.group('routing') { |g|
-    g.measure 'conns_active', active
-    g.measure 'conns_queued', queued
-    g.measure 'queue_time', queue_time
-  }        
+#  Librato.group('routing') { |g|
+#    g.measure 'conns_active', active
+#    g.measure 'conns_queued', queued
+#    g.measure 'queue_time', queue_time
+#  }        
 end
