@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
   def index
     if rand <= 0.1
-      sleep [LONG_WAIT,0].max
+      sleep [LONG_WAIT.rand,0].max
     else
       sleep [WAIT.rand,0].max
     end
