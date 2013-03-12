@@ -10,8 +10,10 @@ class HomeController < ApplicationController
 
   WAIT_SDEV = ENV['WAIT_SDEV'].to_f || 0.02
 
+  SLOW_REQUEST_RATE = ENV['SLOW_REQUEST_RATE'].to_f || 0.0
+
   def index
-    if rand <= 0.1
+    if SLOW_REQUEST_RATE > 0.0 && rand <= SLOW_REQUEST_RATE
       sleep [LONG_WAIT.rand,0].max
     else
       sleep [WAIT.rand,0].max
